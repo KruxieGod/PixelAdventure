@@ -12,6 +12,7 @@ public class FatBirdMovement : Entity
     private bool _isFalling = false;
     private bool _isFlying = true;
     private Animator _animator;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -72,6 +73,7 @@ public class FatBirdMovement : Entity
     {
         if (collision.gameObject == Hero.Instance.gameObject)
         {
+            if (Hero.Instance.AboveMonster()) Hero.Instance.Die();
             if (Hero.Instance.CheckOnMonsterGround())
             {
                 StartCoroutine(HitAnimation());

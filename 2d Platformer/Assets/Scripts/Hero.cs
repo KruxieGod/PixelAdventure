@@ -263,4 +263,12 @@ public class Hero : Entity
     {
         if (collision.gameObject.layer == 8) this.GetDamage(collision.gameObject);
     }
+
+    public bool AboveMonster()
+    {
+        return Physics2D.Raycast(
+            groundCheckTransformFirst.position, Vector2.up, 0.02f+1.5f,layerMonster).collider != null ||
+            Physics2D.Raycast(
+            groundCheckTransformSecond.position, Vector2.up, 0.02f + 1.5f, layerMonster).collider != null;
+    }
 }
