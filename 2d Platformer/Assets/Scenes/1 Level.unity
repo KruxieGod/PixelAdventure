@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 57208936}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PositionEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18820,7 +18820,7 @@ GameObject:
   - component: {fileID: 1685150549}
   - component: {fileID: 1685150552}
   - component: {fileID: 1685150553}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FatBird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18898,7 +18898,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!4 &1685150551
 Transform:
   m_ObjectHideFlags: 0
@@ -19502,11 +19502,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1531843074343701947, guid: 0c772375369710f42a779d4bf4a0225b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.43
+      value: 16.64
       objectReference: {fileID: 0}
     - target: {fileID: 1531843074343701947, guid: 0c772375369710f42a779d4bf4a0225b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.96
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 1531843074343701947, guid: 0c772375369710f42a779d4bf4a0225b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20191,7 +20191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2138152298}
   - component: {fileID: 2138152299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

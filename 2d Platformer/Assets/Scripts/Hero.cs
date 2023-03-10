@@ -25,8 +25,6 @@ public class Hero : Entity
     private bool _dead;
     public static Hero Instance { get; set; }
 
-    private bool _flipped;
-
     public bool IsMonster;
     private bool _isDamaged;
     public bool IsFalling;
@@ -133,7 +131,7 @@ public class Hero : Entity
     void FixedUpdate()
     {
         CheckGround();
-        if (!_dead)
+        if (!_dead && !_isDamaged)
             Run();
     }
 
@@ -201,7 +199,7 @@ public class Hero : Entity
             StartCoroutine(Hitting());
             Vector2 direction = (entity.transform.position - transform.position).normalized.x < 0 ?
                 Vector2.right : Vector2.left;
-            rb.AddForce((Vector2.up + direction) * _jump, ForceMode2D.Impulse);
+            rb.AddForce((Vector2.up + direction) * _jump/1.5f, ForceMode2D.Impulse);
             if (rb.velocity.magnitude >= maxVelocityX)
                 rb.velocity = rb.velocity.normalized * maxVelocityX;
         }
@@ -254,8 +252,10 @@ public class Hero : Entity
     }
     private IEnumerator Hitting()
     {
+        _isDamaged = true;
         animator.SetBool("IsDamaged", true);
         yield return new WaitForSeconds(0.4f);
+        _isDamaged = false;
         animator.SetBool("IsDamaged", false);
     }
 
