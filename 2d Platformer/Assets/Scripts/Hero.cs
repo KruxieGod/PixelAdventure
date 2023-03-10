@@ -46,7 +46,7 @@ public class Hero : Entity
 
     private Rigidbody2D rb;
     public SpriteRenderer Sprite;
-
+    private bool _isSliding;
     public bool isRunning;
     private void Start()
     {
@@ -65,6 +65,9 @@ public class Hero : Entity
 
     private void Update()
     {
+        SlidingOnWall();
+        if (!_isSliding)
+            CheckGround();
         IsFalling = rb.velocity.y < 0.0f;
         animator.SetBool("IsFalling", IsFalling);
         if (Input.GetButtonDown("Jump") && isGrounded) 
@@ -84,6 +87,27 @@ public class Hero : Entity
         {
             if (i < _health) _hearts[i].sprite = _aliveHeart;
             else _hearts[i].sprite = _deadHeart;
+        }
+    }
+
+    private void SlidingOnWall()
+    {
+        Physics2D.queriesStartInColliders = false;
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, 0.55f, groundCheckLayerMask);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, 0.55f, groundCheckLayerMask);
+        if (hitLeft.collider != null) Sprite.flipX = true;
+        else if (hitRight.collider != null) Sprite.flipX = false;
+        if ((hitLeft.collider != null || hitRight.collider != null) && rb.velocity.y < 1)
+        {
+            _isSliding = true;
+            animator.SetBool("IsSliding", _isSliding);
+            isGrounded = true;
+            rb.velocity = Vector2.down;
+        }
+        else
+        {
+            _isSliding = false;
+            animator.SetBool("IsSliding", _isSliding);
         }
     }
 
@@ -130,7 +154,6 @@ public class Hero : Entity
 
     void FixedUpdate()
     {
-        CheckGround();
         if (!_dead && !_isDamaged)
             Run();
     }
