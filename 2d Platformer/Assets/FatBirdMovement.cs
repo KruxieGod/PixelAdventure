@@ -20,6 +20,7 @@ public class FatBirdMovement : Entity
 
     private void Awake()
     {
+        _lives = 5;
         _positionEnd = positionEnd.position;
     }
 
@@ -33,7 +34,7 @@ public class FatBirdMovement : Entity
         {
             _isFlying = false;
             _isFalling = true;
-            _rb.gravityScale = 1f;
+            _rb.gravityScale = 3f;
         }
         if (_isGrounded)
         {
@@ -58,5 +59,25 @@ public class FatBirdMovement : Entity
         _animator.SetBool("IsGrounded", false);
         _rb.gravityScale = 0f;
         _isFalling = false;
+    }
+
+    private IEnumerator HitAnimation()
+    {
+        _animator.SetBool("IsHitted", true);
+        yield return new WaitForSeconds(0.4f);
+        _animator.SetBool("IsHitted", false);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject == Hero.Instance.gameObject)
+        {
+            if (Hero.Instance.CheckOnMonsterGround())
+            {
+                StartCoroutine(HitAnimation());
+                this.GetDamage();
+            }
+            else Hero.Instance.GetDamage(this.gameObject);
+        }
     }
 }
