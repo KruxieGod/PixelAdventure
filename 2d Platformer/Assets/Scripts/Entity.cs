@@ -5,10 +5,10 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     protected int _lives;
-    public virtual void GetDamage(GameObject entity = null)
+    public virtual void GetDamage(int lives = 0 ,GameObject entity = null)
     {
         Hero.Instance.AttackSound();
-        _lives--;
+        _lives-=lives;
         Debug.Log("Ó Entity: "+_lives);
         if (_lives<1)
             Die();

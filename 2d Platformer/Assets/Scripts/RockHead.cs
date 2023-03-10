@@ -40,7 +40,7 @@ public class RockHead : Entity
         _isReacharged = true;
     }
 
-    public override void GetDamage(GameObject entity = null)
+    public override void GetDamage(int lives = 0 ,GameObject entity = null)
     {
         _animator.SetBool("Hit", true);
         StartCoroutine(Hitting());

@@ -67,7 +67,7 @@ public class RinoScript : Entity
         _animator.SetBool("IsHittedByWall", false);
     }
 
-    public override void GetDamage(GameObject entity = null)
+    public override void GetDamage(int lives = 0,GameObject entity = null)
     {
         StartCoroutine(AnimatorDamage());
         _lives--;
@@ -90,7 +90,7 @@ public class RinoScript : Entity
         {
             if (!Hero.Instance.CheckOnMonsterGround())
             {
-                Hero.Instance.GetDamage(this.gameObject);
+                Hero.Instance.GetDamage(1,this.gameObject);
                 if (_isRunning)
                 {
                     StartCoroutine(AnimationHitByWall());
@@ -98,7 +98,7 @@ public class RinoScript : Entity
                 }
             }
             else 
-                this.GetDamage();
+                this.GetDamage(1);
         }
     }
 }

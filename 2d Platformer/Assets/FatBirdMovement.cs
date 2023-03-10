@@ -50,7 +50,7 @@ public class FatBirdMovement : Entity
 
     private void CheckOnGround()
     {
-        _isGrounded = Physics2D.Raycast(transform.position,Vector2.down,0.1f).collider != null;
+        _isGrounded = Physics2D.Raycast(transform.position,Vector2.down,0.1f,Hero.Instance.groundCheckLayerMask).collider != null;
     }
 
     private IEnumerator AnimationIdleGround()
@@ -73,13 +73,13 @@ public class FatBirdMovement : Entity
     {
         if (collision.gameObject == Hero.Instance.gameObject)
         {
-            if (Hero.Instance.AboveMonster()) Hero.Instance.Die();
+            if (Hero.Instance.AboveMonster() && _isFlying) Hero.Instance.GetDamage(5);
             if (Hero.Instance.CheckOnMonsterGround())
             {
                 StartCoroutine(HitAnimation());
-                this.GetDamage();
+                this.GetDamage(1);
             }
-            else Hero.Instance.GetDamage(this.gameObject);
+            else Hero.Instance.GetDamage(1,this.gameObject);
         }
     }
 }

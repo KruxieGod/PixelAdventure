@@ -42,7 +42,7 @@ public class WalkingMonster : Entity
         if (collision.gameObject == Hero.Instance.gameObject)
         {
             if (!Hero.Instance.CheckOnMonsterGround()) 
-                Hero.Instance.GetDamage(Instance.gameObject);
+                Hero.Instance.GetDamage(1,Instance.gameObject);
             else 
                 this.GetDamage();
         }

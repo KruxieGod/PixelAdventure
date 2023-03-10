@@ -14,7 +14,7 @@ public class Worm: Entity
         if (collision.gameObject == Hero.Instance.gameObject)
         {
             if (!Hero.Instance.CheckOnMonsterGround()) 
-                Hero.Instance.GetDamage(this.gameObject);
+                Hero.Instance.GetDamage(1,this.gameObject);
             else 
                 this.GetDamage();
         }

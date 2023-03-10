@@ -204,9 +204,9 @@ public class Hero : Entity
         attackSound.Play();
     }
 
-    public override void GetDamage(GameObject entity = null)
+    public override void GetDamage(int lives = 0 ,GameObject entity = null)
     {
-        _lives -= 1;
+        _lives -= lives;
         if (_lives == 0)
         {
             foreach (var item in _hearts)
@@ -284,7 +284,7 @@ public class Hero : Entity
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 8) this.GetDamage(collision.gameObject);
+        if (collision.gameObject.layer == 8) this.GetDamage(1, collision.gameObject);
     }
 
     public bool AboveMonster()
