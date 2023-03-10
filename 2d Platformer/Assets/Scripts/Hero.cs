@@ -50,13 +50,16 @@ public class Hero : Entity
     public SpriteRenderer Sprite;
 
     public bool isRunning;
+    private void Start()
+    {
+        Instance = this;
+    }
     private void Awake()
     {
         if (NumberHero != SaveData.MainCharacher) gameObject.active = false;
         if (MusicController.Instance != null) Destroy(MusicController.Instance.gameObject);
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        Instance = this;
         IsReacharged = true;
         _lives = 5;
         _health = _lives;
