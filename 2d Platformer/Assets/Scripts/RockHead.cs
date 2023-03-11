@@ -45,10 +45,16 @@ public class RockHead : Entity
         _animator.SetBool("Hit", true);
         StartCoroutine(Hitting());
         Hero.Instance.AttackSound();
-        _lives--;
+        _lives-=lives;
         Debug.Log("Ó Entity: " + _lives);
         if (_lives < 1)
-            Die();
+            StartCoroutine(AnimationDead());
+    }
+
+    private IEnumerator AnimationDead()
+    {
+        yield return new WaitForSeconds(0.4f);
+        Die();
     }
 
     private IEnumerator Hitting()

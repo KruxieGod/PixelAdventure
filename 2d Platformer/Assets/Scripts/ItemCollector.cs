@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ItemCollector : MonoBehaviour
 {
     public int Apples = 0;
+    public static int CollectedAttack = 0;
     public ItemCollector Instance;
     [SerializeField] Text text;
     [SerializeField] AudioSource audioGold;
@@ -22,6 +23,12 @@ public class ItemCollector : MonoBehaviour
             StartCoroutine(IsCollected(collision));
             Apples++;
             text.text = "Apples: " + Apples;
+        }
+        if (collision.gameObject.CompareTag("Attack"))
+        {
+            audioGold.Play();
+            StartCoroutine(IsCollected(collision));
+            CollectedAttack++;
         }
     }
 

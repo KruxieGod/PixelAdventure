@@ -165,13 +165,13 @@ public class Hero : Entity
         Vector3 vectorAttack = new Vector3(1.6f, 0);
         if (movement.x < 0)
         {
-            Sprite.flipX = true;
+            if (!_isSliding) Sprite.flipX = true;
             if (transform.position.x - 0.75f < AttackPos.transform.position.x)
                 AttackPos.transform.position -= vectorAttack;
         }
         else if (movement.x > 0)
         {
-            Sprite.flipX = false;
+            if (!_isSliding) Sprite.flipX = false;
             if (transform.position.x + 0.75f > AttackPos.transform.position.x)
                 AttackPos.transform.position += vectorAttack;
         }
@@ -241,24 +241,22 @@ public class Hero : Entity
 
     public void Attack()
     {
-        if (isGrounded && IsReacharged)
+        if (isGrounded && ItemCollector.CollectedAttack > 0)
         {
             IsAttacking = true;
-            IsReacharged= false;
-
             StartCoroutine(AttackAnimation());
-            StartCoroutine(AttackCoolDown());
         }
     }
 
     public virtual void OnAttack()
     {
+        ItemCollector.CollectedAttack--;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(AttackPos.position, AttackRange, layerMonster);
         if (colliders.Length == 0) attackAirSound.Play();
         else attackSound.Play();
         for (int i = 0; i < colliders.Length; i++)
         {
-            colliders[i].GetComponent<Entity>().GetDamage();
+            colliders[i].GetComponent<Entity>().GetDamage(5);
         }
     }
 
@@ -268,11 +266,6 @@ public class Hero : Entity
         IsAttacking = false;
     }
 
-    private IEnumerator AttackCoolDown()
-    {
-        yield return new WaitForSeconds(1.5f);
-        IsReacharged = true;
-    }
     private IEnumerator Hitting()
     {
         _isDamaged = true;
