@@ -28,6 +28,7 @@ public class ItemCollector : MonoBehaviour
     private IEnumerator IsCollected(Collider2D collision)
     {
         collision.GetComponent<Animator>().SetBool("Collected", true);
+        collision.enabled = true;
         yield return new WaitForSeconds(0.4f);
         Destroy(collision.gameObject);
     }
