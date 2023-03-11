@@ -12,6 +12,13 @@ public class MovementPlatformReally : MonoBehaviour
     private bool _directionUp = true;
     public bool _isReacharged = true;
     public bool IsRepeated = true;
+    private Rigidbody2D _rb;
+
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
+
     void Awake()
     {
         _firstPosition = first.position;
@@ -24,6 +31,7 @@ public class MovementPlatformReally : MonoBehaviour
         if (transform.position.y > _lastPosition.y && IsRepeated)
         {
             _directionUp = false;
+            _rb.velocity = Vector3.zero;
             StartCoroutine(Moving());
             StartCoroutine(Repeated());
         }
@@ -31,6 +39,7 @@ public class MovementPlatformReally : MonoBehaviour
         else if (transform.position.y < _firstPosition.y && IsRepeated)
         {
             _directionUp = true;
+            _rb.velocity = Vector3.zero;
             StartCoroutine(Moving()); 
             StartCoroutine(Repeated());
         }
@@ -38,8 +47,8 @@ public class MovementPlatformReally : MonoBehaviour
         if (_isReacharged)
         {
             float direction = _directionUp ? 1f : -1f;
-            Vector3 movement = new Vector3(0, (_speed / 50.0f) * direction);
-            transform.Translate(movement);
+            Vector3 movement = new Vector3(0, (_speed/2f) * direction);
+            _rb.velocity = movement;
         }
     }
 
