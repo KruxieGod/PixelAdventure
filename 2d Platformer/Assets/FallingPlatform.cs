@@ -12,6 +12,7 @@ public class FallingPlatform : MonoBehaviour
     private Animator _animator;
     private Vector2 _position;
     private float _direction = 1f;
+    private bool _isRest = true;
     void Start()
     {
         _position = transform.position;
@@ -24,16 +25,32 @@ public class FallingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_position.y+1f <= transform.position.y)
+        if (_position.y+1f <= transform.position.y && _isRest && _direction > 0)
+        {
+            StartCoroutine(Idle());
             _direction *= -1f;
-        if (_position.y >= transform.position.y && _direction <0)
+        }
+        if (_position.y >= transform.position.y && _direction <0 && _isRest)
+        {
+            StartCoroutine(Idle());
             _direction *= -1f;
-       if (!_isWas) 
+        }
+        if (!_isWas && _isRest)
+        {
             _rb.velocity = new Vector2(0, _direction);
+        }
         if (_canChange)
             ChangingSprite();
         if (_rb.gravityScale == 3f)
             transform.Rotate(0,0,1);
+    }
+
+    private IEnumerator Idle()
+    {
+        _rb.velocity = Vector2.zero;
+        _isRest = false;
+        yield return new WaitForSeconds(Random.Range(0.1f, 0.9f));
+        _isRest = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

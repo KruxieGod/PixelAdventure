@@ -14,6 +14,12 @@ public class SawMove : MonoBehaviour
     public bool IsRepeated = true;
     public bool RotationHorizontal;
     private Animator animator;
+    private Rigidbody2D _rb;
+    private void Start()
+    {
+        _rb= GetComponent<Rigidbody2D>();
+    }
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -29,6 +35,7 @@ public class SawMove : MonoBehaviour
         if (positionXY.x > positionXY.y && IsRepeated)
         {
             _directionUp = false;
+            _rb.velocity = Vector3.zero;
             StartCoroutine(Moving());
             StartCoroutine(Repeated());
         }
@@ -36,6 +43,7 @@ public class SawMove : MonoBehaviour
         else if (positionXY.x < positionXY.z && IsRepeated)
         {
             _directionUp = true;
+            _rb.velocity = Vector3.zero;
             StartCoroutine(Moving());
             StartCoroutine(Repeated());
         }
@@ -45,9 +53,9 @@ public class SawMove : MonoBehaviour
             GetComponentInChildren<SpriteRenderer>().flipX = _directionUp;
             animator.SetBool("Moving", true);
             float direction = _directionUp ? 1f : -1f;
-            Vector3 movement = new Vector3(0, (_speed / 50.0f) * direction);
-            if (RotationHorizontal) movement = new Vector3((_speed / 50.0f) * direction,0);
-            transform.Translate(movement);
+            Vector3 movement = new Vector3(0, (_speed / 2f) * direction);
+            if (RotationHorizontal) movement = new Vector3((_speed / 2f) * direction,0);
+            _rb.velocity = movement;
         }
     }
 
