@@ -93,7 +93,7 @@ public class Hero : Entity
     private void SlidingOnWall()
     {
         Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, 0.55f, groundCheckLayerMask);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, 0.5f, groundCheckLayerMask);
         RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, 0.55f, groundCheckLayerMask);
         if (hitLeft.collider != null) Sprite.flipX = true;
         else if (hitRight.collider != null) Sprite.flipX = false;
