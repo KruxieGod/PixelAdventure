@@ -182,12 +182,18 @@ public class Hero : Entity
     private void CheckGround()
     {
         CheckOnMonsterGround();
+        IsGrounded();
+        animator.SetBool("IsGrounded", isGrounded);
+    }
+
+    public bool IsGrounded()
+    {
         isGrounded = Physics2D.Raycast(
             groundCheckTransformFirst.position, Vector2.down, 0.02f, groundCheckLayerMask)
             .collider != null || Physics2D.Raycast(
             groundCheckTransformSecond.position, Vector2.down, 0.02f, groundCheckLayerMask)
             .collider != null || IsMonster;
-        animator.SetBool("IsGrounded", isGrounded);
+        return isGrounded;
     }
 
     public bool CheckOnMonsterGround()
