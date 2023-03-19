@@ -228,7 +228,7 @@ public class Hero : Entity
             StartCoroutine(Hitting());
             Vector2 direction = (entity.transform.position - transform.position).normalized.x < 0 ?
                 Vector2.right : Vector2.left;
-            rb.AddForce((Vector2.up + direction) * _jump/1.5f, ForceMode2D.Impulse);
+            rb.velocity =  (Vector2.up + direction) * _jump*2f;
             if (rb.velocity.magnitude >= maxVelocityX)
                 rb.velocity = rb.velocity.normalized * maxVelocityX;
         }
@@ -283,7 +283,7 @@ public class Hero : Entity
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 8) this.GetDamage(1, collision.gameObject);
+        if (collision.gameObject.layer == 8) this.GetDamage(5, collision.gameObject);
     }
 
     public bool AboveMonster()

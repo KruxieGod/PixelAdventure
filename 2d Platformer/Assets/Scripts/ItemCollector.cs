@@ -8,8 +8,10 @@ public class ItemCollector : MonoBehaviour
     public int Apples = 0;
     public static int CollectedAttack = 0;
     public ItemCollector Instance;
-    [SerializeField] Text text;
-    [SerializeField] AudioSource audioGold;
+    [SerializeField] private Text text;
+    [SerializeField] private AudioSource audioGold;
+    [SerializeField] private GameObject platformScript;
+    [SerializeField] private GameObject fanScript;
     private void Awake()
     {
         Instance = this;
@@ -24,12 +26,24 @@ public class ItemCollector : MonoBehaviour
             Apples++;
             text.text = "Apples: " + Apples;
         }
-        if (collision.gameObject.CompareTag("Attack"))
+        else if (collision.gameObject.CompareTag("Attack"))
         {
             audioGold.Play();
             StartCoroutine(IsCollected(collision));
             CollectedAttack++;
         }
+        else if (collision.gameObject.CompareTag("MovementPlatforms"))
+        {
+            audioGold.Play();
+            StartCoroutine(IsCollected(collision));
+            platformScript.GetComponent<SawMove>().enabled = true;
+        }
+        else if (collision.gameObject.CompareTag("MovementFan"))
+        {
+            audioGold.Play();
+            StartCoroutine(IsCollected(collision));
+            fanScript.GetComponent<ScriptFan>().enabled = true;
+        }    
     }
 
     private IEnumerator IsCollected(Collider2D collision)

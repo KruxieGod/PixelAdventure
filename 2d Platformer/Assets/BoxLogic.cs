@@ -8,6 +8,8 @@ public class BoxLogic : MonoBehaviour
     [SerializeField] private Rigidbody2D otherUp;
     [SerializeField] private Rigidbody2D leftBreak;
     [SerializeField] private Rigidbody2D rightBreak;
+
+    [SerializeField] private AudioSource audioFallingItem;
     private Animator animator;
 
     [SerializeField] private Rigidbody2D skillAttack;
@@ -34,6 +36,7 @@ public class BoxLogic : MonoBehaviour
     private IEnumerator AnimationHitting()
     {
         animator.SetBool("Hit", true);
+        audioFallingItem.Play();
         yield return new WaitForSeconds(0.3f);
         StartCoroutine(AppearSkillAttack());
         GetComponent<BoxCollider2D>().enabled = false;

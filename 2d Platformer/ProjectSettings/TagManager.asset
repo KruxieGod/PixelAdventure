@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Apple
   - Attack
+  - MovementPlatforms
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Trap
   - Crashes
   - Boxes
-  - 
+  - Air
   - 
   - 
   - 
