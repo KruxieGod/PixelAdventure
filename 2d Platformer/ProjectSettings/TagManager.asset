@@ -7,6 +7,7 @@ TagManager:
   - Apple
   - Attack
   - MovementPlatforms
+  - MovementFan
   layers:
   - Default
   - TransparentFX

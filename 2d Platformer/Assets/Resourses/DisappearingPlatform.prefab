@@ -118,7 +118,7 @@ Transform:
   m_Children:
   - {fileID: 4307926770276201423}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3349302826563802630
 Rigidbody2D:
@@ -179,7 +179,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000011920929, y: 0.1622951}
+  m_Offset: {x: -0.0046818256, y: 0.16541636}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -190,7 +190,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.009836, y: 0.33879805}
+  m_Size: {x: 1.8444085, y: 0.2701304}
   m_EdgeRadius: 0
 --- !u!114 &2806680277472306392
 MonoBehaviour:

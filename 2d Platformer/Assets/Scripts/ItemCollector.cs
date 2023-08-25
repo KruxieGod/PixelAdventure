@@ -49,7 +49,7 @@ public class ItemCollector : MonoBehaviour
     private IEnumerator IsCollected(Collider2D collision)
     {
         collision.GetComponent<Animator>().SetBool("Collected", true);
-        collision.enabled = true;
+        collision.GetComponent<BoxCollider2D>().enabled = false;
         yield return new WaitForSeconds(0.4f);
         Destroy(collision.gameObject);
     }
